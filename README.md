@@ -32,8 +32,10 @@ In order to collect the time response, please uncomment the next area in ip_moni
 
 ***Notice that I'm using regular expression to match "time=\d+" if your OS is in differente language, you should modify this expression!
 
+Once the programm is running, now you can use the Main-Graph.py script to build graphs in parallel
+
 # Main.py
-This is the Main script
+This is the Main script for ping and ping response stored
 
 # ip_file_valid.py
 This script verifies the path of the file that contains the IP addresses and extract the IP in a list
