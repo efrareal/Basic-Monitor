@@ -49,3 +49,5 @@ This is a simple threading scripts to run in parallel the ip_monitor.py script f
 # ip_monitor.py
 This script performs the actual ping and appends the ping response in a txt file. Also if there are 4 missing pings in a row the scripts sends the email.
 
+# Main-Graph.py
+This is the Main script to plot teh stored information
