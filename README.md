@@ -4,9 +4,9 @@ Ping monitor with smtp alert mail and optional graph time response
 # How to use
 In a txt file storage your IP address you want to poll, in the next format:
 
-10.1.1.1
-10.1.1.2
-10.1.1.3
+10.1.1.1\n
+10.1.1.2\n
+10.1.1.3\n
 ...
 
 In ip_monitor.py fill your SMTP server configuration:
