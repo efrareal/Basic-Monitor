@@ -4,18 +4,18 @@ Ping monitor with smtp alert mail and optional graph time response
 # How to use
 In a txt file storage your IP address you want to poll, in the next format:
 
-10.1.1.1\n
-10.1.1.2\n
-10.1.1.3\n
-...
+     10.1.1.1
+     10.1.1.2
+     10.1.1.3
+     ...
 
 In ip_monitor.py fill your SMTP server configuration:
 
-FROM = 'source@example.com
-TO = 'dest@example.com'
-user = 'username'
-password = '*******'
-server = smtplib.SMTP_SSL('SMTP.SERVER', TCP_port)
+    FROM = 'source@example.com
+    TO = 'dest@example.com'
+    user = 'username'
+    password = '*******'
+    server = smtplib.SMTP_SSL('SMTP.SERVER', TCP_port)
 
 In order to collect the time response, please uncomment the next area in ip_monitor script ,and put your path:
 
