@@ -11,7 +11,7 @@ def plot(ip):
     p = figure(x_axis_type = "datetime", title = "{} Ping Response".format(ip))
 
     #Extracting data from .txt file
-    cpu_data = open ('C:\\Users\\totalnet\\Desktop\\Monitor and Graph\\{}.txt'.format(ip)).readlines()
+    cpu_data = open ('Your-Path\\{}.txt'.format(ip)).readlines()
     values = []
     for each in cpu_data:
         if each.split(',')[0] == 'np.nan':
