@@ -8,6 +8,29 @@ from datetime import datetime
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
+def send_email(message, ip):
+    
+    FROM = 'source@example.com'
+    TO = 'dest@example.com'
+    msg = MIMEMultipart()
+    msg['From'] = FROM
+    msg['To'] = TO
+    msg['Subject'] = 'Ping {} from {}'.format(message, ip)
+                        
+    #Envia correo por puerto 465
+    server = smtplib.SMTP_SSL('smtp.com', 465)
+    server.ehlo()
+    #server.starttls
+    #Haciendo logging a GMAIL
+    user = 'username'
+    password = '*******'
+    try:
+        server.login(user, password)
+        server.sendmail(FROM, TO, msg.as_string())
+        server.quit()
+    except smtplib.SMTPAuthenticationError:
+        print('Error de autenticacion')
+
 def ip_ping(ip):
     #Realiza ping y solo se trae el tipo de respuesta: 0 = echo reply, 1= no response
     ping_reply = subprocess.call('ping %s /n 2' % (ip), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -60,23 +83,8 @@ def ip_monitor(ip):
                                 #Deja de responder PING
                                 print('Fuera de alcance... Mandar correo por sitio fuera')
                                 #Manda correo con alerta ping down!
-                                fromaddr = 'name@example.com'
-                                toaddr = 'dest@example.com'
-                                msg = MIMEMultipart()
-                                msg['From'] = fromaddr
-                                msg['To'] = toaddr
-                                msg['Subject'] = 'Ping down {}'.format(ip)
-                        
-                                #Envia correo por puerto 465
-                                server = smtplib.SMTP_SSL('smtp.com', 465)
-                                server.ehlo()
-                                #server.starttls
-                                #Haciendo logging a GMAIL
-                                user = 'user'
-                                contra = 'password'
-                                server.login(user, contra)
-                                server.sendmail(fromaddr, toaddr, msg.as_string())
-                                server.quit()
+                                message = 'DOWN'
+                                send_email(message,ip)
                         else:
                             ping_count_down = 0
                     else:
@@ -102,22 +110,7 @@ def ip_monitor(ip):
             print('Programa detenido por Usuario')
             sys.exit()
 
-        print('Equipo activo nuevamente')
-        #Manda correo con alerta ping down!
-        fromaddr = 'name@example.com'
-        toaddr = 'destination@example.com'
-        msg = MIMEMultipart()
-        msg['From'] = fromaddr
-        msg['To'] = toaddr
-        msg['Subject'] = 'Ping Up {}'.format(ip)
-                        
-        #Envia correo por puerto 465
-        server = smtplib.SMTP_SSL('smtp.com', 465)
-        server.ehlo()
-        #server.starttls
-        #Haciendo logging a GMAIL
-        user = 'user'
-        contra = 'password'
-        server.login(user, contra)
-        server.sendmail(fromaddr, toaddr, msg.as_string())
-        server.quit()
+        print('Equipo activo nuevamente, enviando correo...')
+        #Manda correo con alerta ping UP!
+        message = 'UP'
+        send_email(message,ip)
